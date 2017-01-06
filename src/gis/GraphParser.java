@@ -9,13 +9,13 @@ import org.jgrapht.graph.*;
 
 public class GraphParser {
 	public static void ParseFileToGraph(SimpleDirectedWeightedGraph <Integer, DefaultWeightedEdge> lGraph){	
-		String directory = "/home/zokoo/projects/gis/src/gis/";//bedziesz miała inną ścieżkę
+		String directory = "src/gis/";
 		//String directory = "D://...";
-		String fileName = directory + "test.txt"; //plik, zawierający graf do testów
+		String fileName = directory + "test.txt"; //plik, zawierajacy graf do testow
 		String line;
 		Integer numOfVertex;
 
-		//dodanie wierzchołków do grafu
+		//dodanie wierzcholkow do grafu
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))){
 			line = br.readLine(); //przeczytaj pierwsza linie	
 			String[] lineParts = line.split(",");
@@ -23,14 +23,14 @@ public class GraphParser {
 			numOfVertex = Integer.parseInt(lineParts[0]);
 			
 			for (int j=0; j< numOfVertex; j++)
-				lGraph.addVertex(j); //dodaj wierzchołki
+				lGraph.addVertex(j); //dodaj wierzcholki
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		//dodanie łuków/krawedzi do grau
+		//dodanie lukow/krawedzi do grafu
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			line = br.readLine(); //omin pierwsza linie
+			line = br.readLine(); //pomin pierwsza linie
 			//System.out.println(line);
 			while ((line = br.readLine()) != null) {
 				String[] edgeVars = line.split(",");
@@ -40,7 +40,7 @@ public class GraphParser {
 				int target = Integer.parseInt(edgeVars[1]);
 				int weight = Integer.parseInt(edgeVars[2]);
 				
-				DefaultWeightedEdge edge = lGraph.addEdge(source, target); //źródło,cel
+				DefaultWeightedEdge edge = lGraph.addEdge(source, target); //zrodlo,cel
 				lGraph.setEdgeWeight(edge, Double.valueOf(weight)); //dodanie wagi do krawedzi
 				
 				//System.out.println(lGraph.getEdgeWeight(edge));
