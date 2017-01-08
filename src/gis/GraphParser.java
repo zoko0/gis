@@ -3,14 +3,11 @@ package gis;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.*;
-import org.jgrapht.*;
 import org.jgrapht.graph.*;
 
 public class GraphParser {
 	public static void ParseFileToGraph(SimpleDirectedWeightedGraph <Integer, DefaultWeightedEdge> lGraph){	
 		String directory = "src/gis/";
-		//String directory = "D://...";
 		String fileName = directory + "test.txt"; //plik, zawierajacy graf do testow
 		String line;
 		Integer numOfVertex;
