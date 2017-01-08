@@ -9,7 +9,16 @@ public class Main {
 			DefaultWeightedEdge.class);
 
 	public static void main(String[] args) {
-		GraphParser.ParseFileToGraph(graph);
+		//graf z pliku
+		//GraphParser.ParseFileToGraph(graph);
+		
+		//losowo generowany graf
+		int verticesCount = 50;
+	    double probabilityOfEdge = 0.8;
+	    SimpleGraphGenerator.doGenerate(graph, verticesCount, probabilityOfEdge);
+	    
+		
+	    
 		System.out.println(graph.toString());
 
 		Path minPath = PathResolver.FindMinWidthPath(graph, 0, 3);
