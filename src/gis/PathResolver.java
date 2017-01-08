@@ -10,7 +10,7 @@ import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 public class PathResolver {
 
-	public static int[] FindMinWidthPath(SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph, int source,
+	public static Path FindMinWidthPath(SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph, int source,
 			int dest) {
 
 		int graphSize = graph.vertexSet().size();
@@ -19,7 +19,8 @@ public class PathResolver {
 		boolean[] visited = new boolean[graphSize]; // all false initially
 
 		for (int i = 0; i < graphSize; i++) {
-			width[i] = Integer.MIN_VALUE;
+			width[i] = Integer.MAX_VALUE;
+			prev[i] = -1;
 		}
 
 		Comparator<Vertex> comparator = new MinWidthVertexComparator();
@@ -28,7 +29,7 @@ public class PathResolver {
 		q.add(new Vertex(source, width[source]));
 
 		while (!q.isEmpty()) {
-			
+
 			Vertex next = q.poll();
 			visited[next.getIndex()] = true;
 
@@ -54,10 +55,11 @@ public class PathResolver {
 			}
 		}
 
-		return prev;
+		return new Path(graph, prev, source, dest);
 	}
 
-	public static int[] FindMaxWidthPath(SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph, int source, int dest) {
+	public static Path FindMaxWidthPath(SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph, int source,
+			int dest) {
 
 		int graphSize = graph.vertexSet().size();
 		int[] width = new int[graphSize]; // shortest known distance from source
@@ -66,6 +68,7 @@ public class PathResolver {
 
 		for (int i = 0; i < graphSize; i++) {
 			width[i] = Integer.MIN_VALUE;
+			prev[i] = -1;
 		}
 
 		Comparator<Vertex> comparator = new MaxWidthVertexComparator();
@@ -74,7 +77,7 @@ public class PathResolver {
 		q.add(new Vertex(source, width[source]));
 
 		while (!q.isEmpty()) {
-			
+
 			Vertex next = q.poll();
 			visited[next.getIndex()] = true;
 
@@ -91,7 +94,7 @@ public class PathResolver {
 				if (!visited[t]) {
 					int d = Math.max(width[t], Math.max(width[next.getIndex()], (int) graph.getEdgeWeight(edge)));
 
-					if (width[t] > d) {
+					if (width[t] < d) {
 						width[t] = d;
 						prev[t] = next.getIndex();
 						q.add(new Vertex(t, width[t]));
@@ -100,8 +103,7 @@ public class PathResolver {
 			}
 		}
 
-		return prev;
+		return new Path(graph, prev, source, dest);
 	}
-
 
 }

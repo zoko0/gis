@@ -9,9 +9,9 @@ import org.jgrapht.graph.*;
 
 public class GraphParser {
 	public static void ParseFileToGraph(SimpleDirectedWeightedGraph <Integer, DefaultWeightedEdge> lGraph){	
-		String directory = "src/gis/";
+		String directory = "test/input/";
 		//String directory = "D://...";
-		String fileName = directory + "test.txt"; //plik, zawierajacy graf do testow
+		String fileName = directory + "test1.txt"; //plik, zawierajacy graf do testow
 		String line;
 		Integer numOfVertex;
 
