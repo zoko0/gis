@@ -7,16 +7,14 @@ import org.jgrapht.graph.*;
 
 public class GraphParser {
 	public static void ParseFileToGraph(SimpleDirectedWeightedGraph <Integer, DefaultWeightedEdge> lGraph){	
-<<<<<<< HEAD
 		String directory = "test/input/";
 		//String directory = "D://...";
-		String fileName = directory + "test1.txt"; //plik, zawierajacy graf do testow
-=======
-		String directory = "src/gis/";
-		String fileName = directory + "test.txt"; //plik, zawierajacy graf do testow
->>>>>>> refs/remotes/origin/master
+		String fileName = directory + "sciezka.txt"; //plik, zawierajacy graf do testow
+		
+		//String directory = "src/gis/";
+		//String fileName = directory + "test.txt"; //plik, zawierajacy graf do testow
 		String line;
-		Integer numOfVertex;
+		Integer numOfVertex, numOfEdges;
 
 		//dodanie wierzcholkow do grafu
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))){
@@ -24,6 +22,7 @@ public class GraphParser {
 			String[] lineParts = line.split(",");
 			
 			numOfVertex = Integer.parseInt(lineParts[0]);
+			numOfEdges =  Integer.parseInt(lineParts[1]);
 			
 			for (int j=0; j< numOfVertex; j++)
 				lGraph.addVertex(j); //dodaj wierzcholki

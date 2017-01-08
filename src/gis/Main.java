@@ -1,6 +1,5 @@
 package gis;
 
-import java.net.*;
 import org.jgrapht.graph.*;
 
 public class Main {
@@ -10,14 +9,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		//graf z pliku
-		//GraphParser.ParseFileToGraph(graph);
+		GraphParser.ParseFileToGraph(graph);
 		
 		//losowo generowany graf
 		int verticesCount = 50;
 	    double probabilityOfEdge = 0.8;
-	    SimpleGraphGenerator.doGenerate(graph, verticesCount, probabilityOfEdge);
-	    
-		
+	    //SimpleGraphGenerator.doGenerate(graph, verticesCount, probabilityOfEdge);
 	    
 		System.out.println(graph.toString());
 
