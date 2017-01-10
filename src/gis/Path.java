@@ -19,7 +19,7 @@ public class Path {
 		mMaxWidth = Integer.MIN_VALUE;
 		mPath = new LinkedList<Integer>();
 
-		while (node >= 0 && node != source) {
+		while (prev.length > node && node >= 0 && prev[node] >= 0 && node != source) {
 
 			DefaultWeightedEdge edge = graph.getEdge(prev[node], node);
 			int weight = (int) graph.getEdgeWeight(edge);
@@ -31,11 +31,12 @@ public class Path {
 			mPath.add(0, node);
 			node = prev[node];
 		}
-		
-		if(node<0)
-			mPath.clear();
-		
+
 		mPath.add(0, source);
+
+		if (node < 0 || (prev[node] < 0 && node != source) || source == dest)
+			mPath.clear();
+
 	}
 
 	public int getMinWidth() {
@@ -45,20 +46,19 @@ public class Path {
 	public int getMaxWidth() {
 		return mMaxWidth;
 	}
-	
-	public String toString()
-	{
-		if(mPath.size() == 0)
+
+	public String toString() {
+		if (mPath.size() == 0)
 			return "Path doesn't exist";
-		
+
 		StringBuilder sb = new StringBuilder();
-		for(Integer node : mPath)
-			sb.append(node+",");
-		
-		sb.append(" min: "+mMinWidth);
-		sb.append(" max: "+mMaxWidth);
-		
+		for (Integer node : mPath)
+			sb.append(node + ",");
+
+		sb.append(" min: " + mMinWidth);
+		sb.append(" max: " + mMaxWidth);
+
 		return sb.toString();
-		
+
 	}
 }
