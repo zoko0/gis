@@ -30,7 +30,7 @@ public class GraphParser {
 			while ((line = br.readLine()) != null) {
 				String[] edgeVars = line.split(",");
 
-				System.out.println(edgeVars[0] + edgeVars[1] + edgeVars[2]);
+				//System.out.println(edgeVars[0] + edgeVars[1] + edgeVars[2]);
 				int source = Integer.parseInt(edgeVars[0]);
 				int target = Integer.parseInt(edgeVars[1]);
 				int weight = Integer.parseInt(edgeVars[2]);
