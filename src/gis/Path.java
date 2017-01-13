@@ -9,24 +9,27 @@ import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 public class Path {
 
 	private List<Integer> mPath;
-	private int mMinWidth;
-	private int mMaxWidth;
+	private int mWidth;
 
-	public Path(SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph, int[] prev, int source, int dest) {
+	public Path(SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph, int[] prev, int source, int dest, boolean isMax) {
 
 		int node = dest;
-		mMinWidth = Integer.MAX_VALUE;
-		mMaxWidth = Integer.MIN_VALUE;
+		if(isMax)
+			mWidth = Integer.MIN_VALUE;
+		else
+			mWidth = Integer.MAX_VALUE;
+		
 		mPath = new LinkedList<Integer>();
 
 		while (prev.length > node && node >= 0 && prev[node] >= 0 && node != source) {
 
 			DefaultWeightedEdge edge = graph.getEdge(prev[node], node);
 			int weight = (int) graph.getEdgeWeight(edge);
-			if (weight < mMinWidth)
-				mMinWidth = weight;
-			if (weight > mMaxWidth)
-				mMaxWidth = weight;
+			
+			if (!isMax && weight < mWidth)
+				mWidth = weight;
+			else if (isMax && weight > mWidth)
+				mWidth = weight;
 
 			mPath.add(0, node);
 			node = prev[node];
@@ -39,12 +42,8 @@ public class Path {
 
 	}
 
-	public int getMinWidth() {
-		return mMinWidth;
-	}
-
-	public int getMaxWidth() {
-		return mMaxWidth;
+	public int getWidth() {
+		return mWidth;
 	}
 
 	public String toString() {
@@ -55,8 +54,7 @@ public class Path {
 		for (Integer node : mPath)
 			sb.append(node + ",");
 
-		sb.append(" min: " + mMinWidth);
-		sb.append(" max: " + mMaxWidth);
+		sb.append(" value: " + mWidth);
 
 		return sb.toString();
 

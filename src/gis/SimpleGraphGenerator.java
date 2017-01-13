@@ -9,8 +9,8 @@ public class SimpleGraphGenerator {
 				      <Integer, DefaultWeightedEdge> lGraph, int verCount, double probEdge){	
 		Random random = new Random();
 		int randomWeight;
-		int minWeight = 0;
-		int maxWeight = 10;
+		int minWeight = 1;
+		int maxWeight = 100;
 		
 		//dodaj wierzcholki
 		for (int i = 0; i < verCount; i++) {

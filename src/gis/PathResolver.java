@@ -8,13 +8,15 @@ import java.util.PriorityQueue;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
+
 public class PathResolver {
 
+	// method compute path with min edge weight from source to dist
 	public static Path FindMinWidthPath(SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph, int source,
 			int dest) {
 
 		int graphSize = graph.vertexSet().size();
-		int[] width = new int[graphSize]; // shortest known distance from source
+		int[] width = new int[graphSize]; // min known width from source
 		int[] prev = new int[graphSize]; // prev node in path
 		boolean[] visited = new boolean[graphSize]; // all false initially
 
@@ -55,14 +57,16 @@ public class PathResolver {
 			}
 		}
 
-		return new Path(graph, prev, source, dest);
+		return new Path(graph, prev, source, dest, false);
 	}
 
+	
+	// method compute path with max edge weight from source to dist
 	public static Path FindMaxWidthPath(SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph, int source,
 			int dest) {
 
 		int graphSize = graph.vertexSet().size();
-		int[] width = new int[graphSize]; // shortest known distance from source
+		int[] width = new int[graphSize]; // max known width from source
 		int[] prev = new int[graphSize]; // prev node in path
 		boolean[] visited = new boolean[graphSize]; // all false initially
 
@@ -103,7 +107,7 @@ public class PathResolver {
 			}
 		}
 
-		return new Path(graph, prev, source, dest);
+		return new Path(graph, prev, source, dest, true);
 	}
 
 }

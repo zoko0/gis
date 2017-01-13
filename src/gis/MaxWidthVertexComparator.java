@@ -2,6 +2,7 @@ package gis;
 
 import java.util.Comparator;
 
+//comparator used with max priority queue
 public class MaxWidthVertexComparator implements Comparator<Vertex> {
 
 	@Override

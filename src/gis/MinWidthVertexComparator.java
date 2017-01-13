@@ -2,6 +2,7 @@ package gis;
 
 import java.util.Comparator;
 
+// comparator used with min priority queue
 public class MinWidthVertexComparator implements Comparator<Vertex> {
 
 	@Override
